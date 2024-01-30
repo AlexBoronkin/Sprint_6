@@ -45,13 +45,5 @@ public class FelineTest {
         assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
     }
 
- /*   @Test
-    public void eatMeatTestException() {
-        Exception exception = assertThrows(Exception.class, () -> {
-            Animal animal = new Animal();
-            animal.getFood("Бобер");
-        }  );
-    }*/
-
 
 }

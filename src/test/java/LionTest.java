@@ -21,7 +21,7 @@ public class LionTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Spy
+    @Mock
     Feline feline;
 
 
@@ -29,27 +29,22 @@ public class LionTest {
 
     @Test
     public void getKittensTest() {
+        Mockito.when(feline.getKittens()).thenReturn(1);
         Lion lion = new Lion(feline);
         assertEquals(1, lion.getKittens());
     }
 
     @Test
     public void getFoodTest() throws Exception {
+        Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         Lion lion = new Lion(feline);
-            assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
+            assertEquals(feline.getFood("Хищник"), lion.getFood());
     }
 
     @Test
     public void getFoodTestException() throws Exception {
-        Lion lion = Mockito.mock(Lion.class);
-        Mockito.when(lion.getFood()).thenThrow(new Exception());
-        assertThrows(Exception.class, () -> lion.getFood());
-/*        Mockito.when(lion.getFood()).thenReturn(Collections.singletonList("Неизвестный вид животного, используйте значение Травоядное или Хищник"));
-        try {
-            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", lion.getFood());
-        } catch (Exception e) {
-            assertEquals ("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
-        }
-*/
+        assertThrows(Exception.class, () -> {
+           new Lion("Млекопитающее", new Feline());
+        });
     }
 }

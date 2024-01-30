@@ -34,19 +34,14 @@ public class LionParamTest {
         return new Object[][] {
                 {"Самец", true},
                 {"Самка", false},
-                {"Млекопитающее", false},
         };
     }
 
     @Test
     public void LionParamTest() throws Exception {
         Feline feline = Mockito.mock((Feline.class));
-        try {
             Lion lion = new Lion(sex, feline);
             assertEquals(hasMane, lion.doesHaveMane());
-        } catch (Exception e) {
-            assertEquals("Используйте допустимые значения пола животного - самей или самка", e.getMessage());
-        }
     }
 
 
